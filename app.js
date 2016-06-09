@@ -1,27 +1,37 @@
 // init overlay...
 var overlay = document.querySelector('#overlay');
-var closeButton = document.querySelector('.closeButton');
+var closeButton = document.querySelector('.close-button');
 
 closeButton.addEventListener( 'click', function() {
   overlay.style.display = 'none';
 }, false );
 
+var searchButton = document.querySelector('.search-button');
+
+searchButton.addEventListener( 'click', function() {
+  displayImages( document.querySelector( 'input' ).value );
+}, false );
+
+
+function displayImages( searchTerms ) {
+  if( searchTerms !== null ) {
+    var query = 'https://www.googleapis.com/customsearch/v1?'
+              + 'key=AIzaSyDRNg12al500nvBg4w9vXxHxqMt4iVPgLA'
+              + '&cx=013785967554816369765:m8ndxwd7vzw'
+              + '&q=' + searchTerms;
+
+    callAjax( query, function(results) {
+      results.items.forEach( function(item) {
+        insertImage( item.pagemap.cse_thumbnail[0].src );
+      });
+    });
+  }
+}
+
+
 // init image list...
 var imageList = document.querySelector('.image-list');
 imageList.addEventListener( 'click', handleImageClick, false );
-
-var keywords = 'kittens dogs';
-
-var query = 'https://www.googleapis.com/customsearch/v1?'
-          + 'key=AIzaSyDRNg12al500nvBg4w9vXxHxqMt4iVPgLA'
-          + '&cx=013785967554816369765:m8ndxwd7vzw'
-          + '&q=' + keywords;
-
-callAjax( query, function(results) {
-  results.items.forEach( function(item) {
-    insertImage( item.pagemap.cse_thumbnail[0].src );
-  });
-});
 
 
 function insertImage( url ) {
