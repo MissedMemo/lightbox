@@ -110,4 +110,5 @@ img {
   left: 20px;
   right: 20px;
   background-color: black;
+  background-size: cover;
 }

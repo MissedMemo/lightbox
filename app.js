@@ -1,16 +1,35 @@
 // init overlay...
 var overlay = document.querySelector('#overlay');
 var closeButton = document.querySelector('.close-button');
+var searchButton = document.querySelector('.search-button');
+var imageList = document.querySelector('.image-list');
 
 closeButton.addEventListener( 'click', function() {
   overlay.style.display = 'none';
 }, false );
 
-var searchButton = document.querySelector('.search-button');
 
 searchButton.addEventListener( 'click', function() {
   displayImages( document.querySelector( 'input' ).value );
 }, false );
+
+
+// ONE listener (on parent container) handles click on ANY image!
+imageList.addEventListener( 'click', function(e) {
+  if( e.target.src !== undefined ) {
+    overlay.style.display = 'block';
+    overlay.style.backgroundImage = 'url( ' + e.target.src + ')';
+  }
+  e.stopPropagation();
+}, false );
+
+
+// Duplicate jQuery method to clear list elements
+imageList.empty = function() {
+  while( this.firstChild ) {
+    this.removeChild( this.firstChild );
+  }
+};
 
 
 function displayImages( searchTerms ) {
@@ -21,6 +40,7 @@ function displayImages( searchTerms ) {
               + '&q=' + searchTerms;
 
     callAjax( query, function(results) {
+      imageList.empty(); // remove all displayed images
       results.items.forEach( function(item) {
         insertImage( item.pagemap.cse_thumbnail[0].src );
       });
@@ -29,27 +49,10 @@ function displayImages( searchTerms ) {
 }
 
 
-// init image list...
-var imageList = document.querySelector('.image-list');
-imageList.addEventListener( 'click', handleImageClick, false );
-
-
 function insertImage( url ) {
   var li = document.createElement('li');
   var img = document.createElement('img');
   img.setAttribute( 'src', url );
   li.appendChild(img);
   imageList.appendChild(li);
-}
-
-
-function handleImageClick(e) {
-  //console.log( 'target & current.target:', e.target, e.currentTarget );
-  if( e.target.src !== undefined ) {
-    overlay.style.display = 'block';
-    overlay.style.backgroundSize = 'cover';
-    overlay.style.backgroundPosition = 'center';
-    overlay.style.backgroundImage = 'url( ' + e.target.src + ')';
-  }
-  e.stopPropagation();
 }
