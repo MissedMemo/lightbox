@@ -1,13 +1,13 @@
 // init overlay...
-var overlay = document.getElementById('overlay');
-var closeButton = document.getElementById('closeButton');
+var overlay = document.querySelector('#overlay');
+var closeButton = document.querySelector('.closeButton');
 
 closeButton.addEventListener( 'click', function() {
   overlay.style.display = 'none';
 }, false );
 
 // init image list...
-var imageList = document.getElementById('image-list');
+var imageList = document.querySelector('.image-list');
 imageList.addEventListener( 'click', handleImageClick, false );
 
 var keywords = 'kittens dogs';
