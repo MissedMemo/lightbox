@@ -45,12 +45,19 @@ function getImages( searchTerms ) {
             + 'key=AIzaSyDRNg12al500nvBg4w9vXxHxqMt4iVPgLA'
             + '&cx=013785967554816369765:m8ndxwd7vzw'
             + '&q=' + searchTerms;
+  
+  // Google API limits results to 10 per query, so issue multiple queries to fill page
+  for( var page = 1; page < 51; page += 10 ) {
 
-  callAjax( query, function(results) {
-    results.items.forEach( function(item) {
-      insertImage( item.pagemap.cse_thumbnail[0].src );
+    callAjax( query + '&start=' + page, function(results) {
+      results.items.forEach( function(item) {
+        if( item.pagemap && item.pagemap.cse_thumbnail ) {
+          insertImage( item.pagemap.cse_thumbnail[0].src );
+        }
+      });
     });
-  });
+
+  }
 }
 
 
