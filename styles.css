@@ -60,16 +60,25 @@ header {
   left: -4px;
   top: -1px;
   background-color: #207cca;
-  border: none; /*2px solid #207cca; */
+  border: none;
   color: rgba( 255, 255, 255, 0.75 );
   font-size: 18px;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
 
-.search-panel button:hover  {
+.search-panel button:hover {
   background-color: blue;
-  border-color: blue;
+}
+
+.search-panel button:focus {
+  outline: 0;
+}
+
+.search-panel button[disabled] {
+  background-color: transparent;
+  color: rgba( 255, 255, 255, 0.3 );
+  border: 1px solid;
 }
 
 

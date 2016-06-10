@@ -1,17 +1,24 @@
-// init overlay...
-var overlay = document.querySelector('#overlay');
-var closeButton = document.querySelector('.close-button');
 var searchButton = document.querySelector('.search-button');
+var searchField = document.querySelector( '.search-panel input' );
 var imageList = document.querySelector('.image-list');
+var overlay = document.querySelector('#overlay');
+var closeButton = document.querySelector('#overlay .close-button');
+
+searchButton.disabled = true; // init to disabled
 
 closeButton.addEventListener( 'click', function() {
   overlay.style.display = 'none';
 }, false );
 
 
+searchField.addEventListener('input', function(e) {
+  searchButton.disabled = (searchField.value.length === 0);
+}, false);
+
+
 searchButton.addEventListener( 'click', function() {
   imageList.empty(); // remove currently-displayed images
-  displayImages( document.querySelector( 'input' ).value );
+  getImages( searchField.value );
 }, false );
 
 
@@ -33,19 +40,17 @@ imageList.empty = function() {
 };
 
 
-function displayImages( searchTerms ) {
-  if( searchTerms !== null ) {
-    var query = 'https://www.googleapis.com/customsearch/v1?'
-              + 'key=AIzaSyDRNg12al500nvBg4w9vXxHxqMt4iVPgLA'
-              + '&cx=013785967554816369765:m8ndxwd7vzw'
-              + '&q=' + searchTerms;
+function getImages( searchTerms ) {
+  var query = 'https://www.googleapis.com/customsearch/v1?'
+            + 'key=AIzaSyDRNg12al500nvBg4w9vXxHxqMt4iVPgLA'
+            + '&cx=013785967554816369765:m8ndxwd7vzw'
+            + '&q=' + searchTerms;
 
-    callAjax( query, function(results) {
-      results.items.forEach( function(item) {
-        insertImage( item.pagemap.cse_thumbnail[0].src );
-      });
+  callAjax( query, function(results) {
+    results.items.forEach( function(item) {
+      insertImage( item.pagemap.cse_thumbnail[0].src );
     });
-  }
+  });
 }
 
 
