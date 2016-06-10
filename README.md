@@ -2,6 +2,10 @@
 
 A simple 'Lightbox' demo implementation, relying only on plain Javascript for DOM manipulation and ajax calls.
 
-- displayed image data is the result of queries made through Google's 'Custom Search Engine' (CSE) API.
+[http://lightboxing.herokuapp.com]()
 
-- hosting a static site on Heroku http://lightboxing.herokuapp.com/, requires some trivial boilerplate (index.php and composer.json) 
+- files index.php & composer.json required to host a static site on Heroku 
+
+- image data retrieved via Google's 'Custom Search Engine' (CSE) API.
+
+ 
