@@ -62,9 +62,15 @@ function getImages( searchTerms ) {
 
 
 function insertImage( url ) {
-  var li = document.createElement('li');
+
   var img = document.createElement('img');
   img.setAttribute( 'src', url );
-  li.appendChild(img);
+
+  var div = document.createElement('div');
+  div.className = 'img-container';
+  div.appendChild(img);
+
+  var li = document.createElement('li');
+  li.appendChild(div);
   imageList.appendChild(li);
 }

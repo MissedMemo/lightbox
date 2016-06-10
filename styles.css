@@ -98,12 +98,20 @@ header {
 
 li {
   display: inline-block;
+  margin-right: 8px;
+}
+
+.img-container {
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 img {
-  width: 200px;
-  height: 200px;
-  background-color: lightgreen;
+  /* full resolution, with clipping */
+  width: 100%;
 }
 
 
