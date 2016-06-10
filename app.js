@@ -28,7 +28,7 @@ searchButton.addEventListener( 'click', function() {
 imageList.addEventListener( 'click', function(e) {
   if( e.target.src !== undefined ) {
     overlay.style.display = 'block';
-    overlayImage.style.backgroundImage = 'url( ' + e.target.src + ')';
+    overlayImage.style.backgroundImage = 'url( ' + e.target.dataset.largeImage + ')';
     overlayCaption.textContent = e.target.dataset.caption;
   }
   e.stopPropagation();
@@ -57,7 +57,9 @@ function getImages( searchTerms ) {
       results.items.forEach( function(item) {
         //console.log( 'item:', item );
         if( item.pagemap && item.pagemap.cse_thumbnail ) {
-          insertImage( item.pagemap.cse_thumbnail[0].src, item.title );
+          insertImage( item.pagemap.cse_thumbnail[0].src,
+                       item.pagemap.cse_image[0].src,
+                       item.title );
         }
       });
     });
@@ -66,11 +68,12 @@ function getImages( searchTerms ) {
 }
 
 
-function insertImage( url, caption ) {
+function insertImage( urlThumbnail, urlActual, caption ) {
 
   var img = document.createElement('img');
-  img.setAttribute( 'src', url );
+  img.setAttribute( 'src', urlThumbnail );
   img.dataset.caption = caption;
+  img.dataset.largeImage = urlActual;
 
   var div = document.createElement('div');
   div.className = 'img-container';
