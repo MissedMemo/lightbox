@@ -10,6 +10,7 @@ closeButton.addEventListener( 'click', function() {
 
 
 searchButton.addEventListener( 'click', function() {
+  imageList.empty(); // remove currently-displayed images
   displayImages( document.querySelector( 'input' ).value );
 }, false );
 
@@ -40,7 +41,6 @@ function displayImages( searchTerms ) {
               + '&q=' + searchTerms;
 
     callAjax( query, function(results) {
-      imageList.empty(); // remove all displayed images
       results.items.forEach( function(item) {
         insertImage( item.pagemap.cse_thumbnail[0].src );
       });
