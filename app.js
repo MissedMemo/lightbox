@@ -1,8 +1,9 @@
 var searchButton = document.querySelector('.search-button');
-var searchField = document.querySelector( '.search-panel input' );
-var imageList = document.querySelector('.image-list');
-var overlay = document.querySelector('#overlay');
-var closeButton = document.querySelector('#overlay .close-button');
+var searchField  = document.querySelector('.search-panel input');
+var imageList    = document.querySelector('.image-list');
+var overlay      = document.querySelector('#overlay');
+var overlayImage = document.querySelector('#overlay .image-area');
+var closeButton  = document.querySelector('#overlay .close-button');
 
 searchButton.disabled = true; // init to disabled
 
@@ -26,7 +27,7 @@ searchButton.addEventListener( 'click', function() {
 imageList.addEventListener( 'click', function(e) {
   if( e.target.src !== undefined ) {
     overlay.style.display = 'block';
-    overlay.style.backgroundImage = 'url( ' + e.target.src + ')';
+    overlayImage.style.backgroundImage = 'url( ' + e.target.src + ')';
   }
   e.stopPropagation();
 }, false );
