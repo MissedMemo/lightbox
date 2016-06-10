@@ -103,16 +103,17 @@ li {
 }
 
 .img-container {
-  text-align: center;
   width: 200px;
   height: 160px;
   border-radius: 3px;
   overflow: hidden;
 }
 
-img {
-  /* full resolution, with clipping */
+img { /* full resolution, vert. clipped & centered */
   width: 100%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
 }
 
@@ -150,7 +151,9 @@ img {
 }
 
 #overlay .image-area {
-  background-size: cover;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
   margin-top: 48px;
   height: 80%;
 }
