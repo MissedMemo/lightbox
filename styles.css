@@ -158,6 +158,25 @@ img { /* full resolution, vert. clipped & centered */
   height: 80%;
 }
 
+.image-area .arrow {
+  height: 40px;
+  width: 40px;
+  background-color: blue;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.arrow.previous {
+  background-color: red;
+}
+
+.arrow.next {
+  background-color: blue;
+  left: 90%;
+}
+
 #overlay .caption-bar {
   margin-top: 20px;
   color: white;

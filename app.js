@@ -24,7 +24,7 @@ searchButton.addEventListener( 'click', function() {
 
   imageList.empty(); // remove currently-displayed images
 
-  if( FAKE_SEARCH ) // work-around to 100 query/day limit on Google CSE
+  if( FAKE_SEARCH ) // work-around Google CSE 100 query/day limit
     getImages_LoremPixelAPI();
   else
     getImages_GoogleCustomSearchAPI( searchField.value );
