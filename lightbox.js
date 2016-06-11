@@ -1,6 +1,6 @@
 ( function( API ) {
 
-  var imagesContainer = document.querySelector('#lightbox-image-container');
+  var imagesContainer = document.querySelector('.lightbox-image-container');
 
   // inject ourselves on top of underlying page elements...
   var overlay = document.createElement('div');
@@ -9,6 +9,13 @@
   // HTML5 'template' feature suport still lacking, so we'll hack it...
   overlay.innerHTML = '<div id="lightbox">'
                     +   '<a href="#" class="close-button">X</a>'
+                    +   '<div class="image-area">'
+                    +     '<button class="imagePrevious">&lsaquo;</button>'
+                    +     '<button class="imageNext">&rsaquo;</button>'
+                    +   '</div>'
+                    +   '<div class="caption-bar">'
+                    +     '<span>( no caption )</span>'
+                    +   '</div>'
                     + '</div>';
 
   document.querySelector('body').appendChild(overlay);
