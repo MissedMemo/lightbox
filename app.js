@@ -3,19 +3,18 @@ var FAKE_SEARCH = true; // toggle actual vs. fake online image search results
 var searchButton   = document.querySelector('.search-button');
 var searchField    = document.querySelector('.search-panel input');
 var imageList      = document.querySelector('.image-list');
-var overlay        = document.querySelector('#overlay');
-var overlayImage   = document.querySelector('#overlay .image-area');
-var overlayCaption = document.querySelector('#overlay .caption-bar span');
-var closeButton    = document.querySelector('#overlay .close-button');
+//var overlay        = document.querySelector('#overlay');
+//var overlayImage   = document.querySelector('#overlay .image-area');
+//var overlayCaption = document.querySelector('#overlay .caption-bar span');
+//var closeButton    = document.querySelector('#overlay .close-button');
 
 searchButton.disabled = true; // init to disabled
 
-console.log( lightbox.test() );
-
+/*
 closeButton.addEventListener( 'click', function() {
   overlay.style.display = 'none';
 }, false );
-
+*/
 
 searchField.addEventListener('input', function(e) {
   searchButton.disabled = (searchField.value.length === 0);
@@ -35,6 +34,7 @@ searchButton.addEventListener( 'click', function() {
 
 
 // ONE listener (on parent container) handles click on ANY image!
+/*
 imageList.addEventListener( 'click', function(e) {
   if( e.target.src !== undefined ) {
     overlay.style.display = 'block';
@@ -43,7 +43,7 @@ imageList.addEventListener( 'click', function(e) {
   }
   e.stopPropagation();
 }, false );
-
+*/
 
 // Duplicate jQuery method to clear list elements
 imageList.empty = function() {
