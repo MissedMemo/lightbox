@@ -1,3 +1,8 @@
+/* no scrolling of underlying content while lightbox is displayed */
+body.disable-scrolling {
+  overflow: hidden;
+}
+
 .lightbox-overlay {
   display: none;
   z-index: 1000;

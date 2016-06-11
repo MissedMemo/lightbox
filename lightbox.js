@@ -1,6 +1,7 @@
 ( function( API ) {
 
   var imagesContainer = document.querySelector('.lightbox-image-container');
+  var body = document.querySelector('body');
 
   // inject ourselves on top of underlying page elements...
   var overlay = document.createElement('div');
@@ -18,7 +19,7 @@
                     +   '</div>'
                     + '</div>';
 
-  document.querySelector('body').appendChild(overlay);
+  body.appendChild(overlay);
 
   var closeButton  = document.querySelector( '#lightbox .close-button' );
 
@@ -26,6 +27,7 @@
   imagesContainer.addEventListener( 'click', function(e) {
     if( e.target.src !== undefined ) {
       overlay.style.display = 'block';
+      body.classList.add('disable-scrolling');
       //overlayImage.style.backgroundImage = 'url( ' + e.target.dataset.largeImage + ')';
       //overlayCaption.textContent = e.target.dataset.caption;
     }
@@ -35,6 +37,7 @@
 
   closeButton.addEventListener( 'click', function() {
     overlay.style.display = 'none';
+    body.classList.remove('disable-scrolling');
   }, false );
 
 
