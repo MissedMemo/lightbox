@@ -1,3 +1,5 @@
+var FAKE_SEARCH = true; // toggle actual vs. fake online image search results
+
 var searchButton   = document.querySelector('.search-button');
 var searchField    = document.querySelector('.search-panel input');
 var imageList      = document.querySelector('.image-list');
@@ -19,8 +21,14 @@ searchField.addEventListener('input', function(e) {
 
 
 searchButton.addEventListener( 'click', function() {
+
   imageList.empty(); // remove currently-displayed images
-  getImages( searchField.value );
+
+  if( FAKE_SEARCH ) // work-around to 100 query/day limit on Google CSE
+    getImages_LoremPixelAPI();
+  else
+    getImages_GoogleCustomSearchAPI( searchField.value );
+
 }, false );
 
 
@@ -43,7 +51,7 @@ imageList.empty = function() {
 };
 
 
-function getImages( searchTerms ) {
+function getImages_GoogleCustomSearchAPI( searchTerms ) {
   var query = 'https://www.googleapis.com/customsearch/v1?'
             + 'key=AIzaSyDRNg12al500nvBg4w9vXxHxqMt4iVPgLA'
             + '&cx=013785967554816369765:m8ndxwd7vzw'
@@ -64,6 +72,22 @@ function getImages( searchTerms ) {
       });
     });
 
+  }
+}
+
+function getImages_LoremPixelAPI( searchTerms ) {
+  
+  for( var i = 0; i < 40; i++ ) {
+
+    // Random height & width between 100-300px
+    var imageHeight = Math.floor(Math.random() * 200) + 100;
+    var imageWidth = Math.floor(Math.random() * 200) + 100;
+
+    var randomImageUrl = [
+      'http://lorempixel.com', imageHeight, imageWidth, 'animals'
+    ].join('/');
+    
+    insertImage( randomImageUrl, randomImageUrl, 'fake animal caption!' );
   }
 }
 
