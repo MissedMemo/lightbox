@@ -10,6 +10,8 @@ var closeButton    = document.querySelector('#overlay .close-button');
 
 searchButton.disabled = true; // init to disabled
 
+console.log( lightbox.test() );
+
 closeButton.addEventListener( 'click', function() {
   overlay.style.display = 'none';
 }, false );
