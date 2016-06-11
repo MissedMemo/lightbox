@@ -134,8 +134,9 @@ img { /* full resolution, vert. clipped & centered */
 }
 
 #overlay .close-button {
-  float: right;
-  margin: 8px;
+  position: absolute;
+  right: 6px;
+  top: 6px;
   padding: 4px 8px;
   font-size: 20px;
   line-height: 20px;
@@ -151,34 +152,42 @@ img { /* full resolution, vert. clipped & centered */
 }
 
 #overlay .image-area {
+  position: absolute;
+  top: 48px;
+  bottom: 60px;
+  width: 100%;
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-  margin-top: 48px;
-  height: 80%;
 }
 
-.image-area .arrow {
-  height: 40px;
-  width: 40px;
-  background-color: blue;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
+#overlay .imagePrevious,
+#overlay .imageNext {
+  font-size: 72px;
+  font-weight: bold;
+  color: darkgray;
+  background: none;
+  border: none;
+}
+#overlay .imagePrevious:hover,
+#overlay .imageNext:hover {
+  background: rgba(0,0,0,0.5);
+  border-radius: 6px;
 }
 
-.arrow.previous {
-  background-color: red;
+#overlay .imagePrevious {
+  float: left;
 }
 
-.arrow.next {
-  background-color: blue;
-  left: 90%;
+#overlay .imageNext {
+  float: right;
 }
 
 #overlay .caption-bar {
-  margin-top: 20px;
-  color: white;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  font-size: 20px;
+  color: rgba( 255, 255, 255, 0.75 );
   text-align: center;
 }
