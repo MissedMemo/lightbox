@@ -11,12 +11,12 @@ body.disable-scrolling {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba( 0, 0, 0, 0.8 );
+  background-color: rgba( 0, 0, 0, 0.6 );
 }
 
 #lightbox {
   position: fixed;
-  top: 120px;
+  top: 20px;
   bottom: 20px;
   left: 20px;
   right: 20px;

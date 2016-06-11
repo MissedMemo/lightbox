@@ -22,6 +22,7 @@
   body.appendChild(overlay);
 
   var closeButton  = document.querySelector( '#lightbox .close-button' );
+  var lightbox  = document.querySelector( '#lightbox' );
 
   // ONE listener (on parent container) handles click on ANY image!
   imagesContainer.addEventListener( 'click', function(e) {
@@ -41,7 +42,16 @@
   }, false );
 
 
-  // expose public API
+  /////////////////  Public API  ///////////////////
+
+  API.setStyle_Margins = function( marginString ) {
+    var margins = marginString.split(' ');
+    lightbox.style.top = margins[0];
+    lightbox.style.right = margins[1];
+    lightbox.style.bottom = margins[2];
+    lightbox.style.left = margins[3];
+  };
+
   window.lightbox = API;
 
 }( {} ));

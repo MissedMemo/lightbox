@@ -6,9 +6,13 @@ var imageList      = document.querySelector('.image-list');
 
 searchButton.disabled = true; // init to disabled
 
+lightbox.setStyle_Margins('120px 20px 20px 20px');
+
+
 searchField.addEventListener('input', function(e) {
   searchButton.disabled = (searchField.value.length === 0);
 }, false);
+
 
 searchButton.addEventListener( 'click', function() {
 
