@@ -1,4 +1,4 @@
-var FAKE_SEARCH = false; // toggle actual vs. fake online image search results
+var FAKE_SEARCH = true; // toggle actual vs. fake online image search results
 
 var searchButton   = document.querySelector('.search-button');
 var searchField    = document.querySelector('.search-panel input');
