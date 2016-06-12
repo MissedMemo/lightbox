@@ -23,20 +23,23 @@
 
   var parentContainer = document.querySelector('.lightbox-image-container');
 
-  var closeButton  = document.querySelector( '#lightbox .close-button' );
-  var lightbox  = document.querySelector( '#lightbox' );
-  var imageArea   = document.querySelector('#lightbox .image-area');
-  var imageCaption = document.querySelector('#lightbox .caption-bar span');
-
   // ONE listener to handle all image clicks
   parentContainer.addEventListener( 'click', function(e) {
     if( e.target.src !== undefined ) {
       overlay.style.display = 'block';
       document.body.classList.add('disable-scrolling');
-      display( imageData[0] );
+      display( 0 );
     }
     e.stopPropagation();
   }, false );
+
+
+  var closeButton  = document.querySelector( '#lightbox .close-button' );
+  var lightbox  = document.querySelector( '#lightbox' );
+  var imageArea   = document.querySelector('#lightbox .image-area');
+  var imageCaption = document.querySelector('#lightbox .caption-bar span');
+  var previous = document.querySelector('#lightbox .imagePrevious' );
+  var next = document.querySelector('#lightbox .imageNext' );
 
 
   closeButton.addEventListener( 'click', function() {
@@ -44,8 +47,26 @@
     document.body.classList.remove('disable-scrolling');
   }, false );
 
+  next.addEventListener( 'click', function() {
+    displayImage( +1 );
+  }, false );
 
-  function display( image ) {
+  previous.addEventListener( 'click', function() {
+    displayImage( -1 );
+  }, false );
+
+  function displayImage( increment ) {
+
+    var index = imageIndex + increment;
+
+    if( index > -1 && index < imageData.length ) {
+      display( index );
+    }
+  }
+
+  function display( index ) {
+    imageIndex = index;
+    var image = imageData[ imageIndex ];
     imageArea.style.backgroundImage = 'url( ' + image.url + ')';
     imageCaption.textContent = image.caption;
   }
