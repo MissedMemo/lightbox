@@ -1,8 +1,7 @@
 var FAKE_SEARCH = true; // toggle actual vs. fake online image search results
 
-var searchForm    = document.querySelector('.search-panel');
-var searchField   = document.querySelector('.search-panel input[type="text"]');
-var searchButton  = document.querySelector('.search-panel input[type="submit"]');
+var searchField   = document.querySelector('.search-panel input');
+var searchButton  = document.querySelector('.search-panel button');
 var imageList     = document.querySelector('.image-list');
 
 
@@ -10,10 +9,16 @@ searchField.addEventListener( 'input', function(e) {
   searchButton.disabled = (searchField.value.length === 0);
 }, false);
 
-searchForm.addEventListener( 'submit', function() {
-  
-  console.log('submitting...');
+searchField.addEventListener( 'keyup', function(e) {
+  e.preventDefault();
+  if( e.keyCode == 13 ) {
+    searchButton.click();
+    searchButton.focus();
+  }
+}, false );
 
+searchButton.addEventListener( 'click', function() {
+  
   imageList.empty(); // remove currently-displayed images
   lightbox.empty();
 
@@ -22,14 +27,8 @@ searchForm.addEventListener( 'submit', function() {
   else
     getImages_GoogleCustomSearchAPI( searchField.value );
 
-  e.preventDefault(); // stop form from submitting
-
 }, false );
 
-/*
-searchButton.addEventListener( 'click', function() {
-}, false );
-*/
 
 // Duplicate jQuery method to clear list elements
 imageList.empty = function() {

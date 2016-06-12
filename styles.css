@@ -53,7 +53,7 @@ header {
   color: lightgray;
 }
 
-.search-panel input[type='submit'] {
+.search-panel button {
   position:relative;
   padding: 9px 15px;
   top: -1px;
@@ -66,21 +66,20 @@ header {
   text-transform: uppercase;
 }
 
-.search-panel input[type='submit']:hover {
+.search-panel button:hover {
   background-color: blue;
 }
 
-.search-panel input[type='submit'][disabled] {
+.search-panel button[disabled] {
   background-color: transparent;
   color: darkgray;
   border: 1px solid;
 }
 
-/*
 .search-panel button:focus {
   outline: 0;
 }
-*/
+
 
 /********************************
      Main Content (images)
