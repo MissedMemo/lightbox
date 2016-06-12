@@ -100,7 +100,9 @@ header {
 
 li {
   display: inline-block;
+  vertical-align: top;
   margin-right: 8px;
+  margin-top: 4px;
 }
 
 .img-container {
