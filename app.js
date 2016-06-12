@@ -1,4 +1,4 @@
-var FAKE_SEARCH = true; // toggle actual vs. fake online image search results
+var FAKE_SEARCH = false; // toggle actual vs. fake online image search results
 
 var searchField   = document.querySelector('.search-panel input');
 var searchButton  = document.querySelector('.search-panel button');
@@ -48,7 +48,7 @@ function getImages_GoogleCustomSearchAPI( searchTerms ) {
   // Google API limits results to 10 per query, so issue multiple queries to fill page
   for( var num = 41; num < 51; num += 10 ) {
 
-    callAjax( query + '&start=' + num, function(results) {
+    utils.callAjax( query + '&start=' + num, function(results) {
 
       var fragment = document.createDocumentFragment();
 
