@@ -17,6 +17,7 @@ searchField.addEventListener('input', function(e) {
 searchButton.addEventListener( 'click', function() {
 
   imageList.empty(); // remove currently-displayed images
+  lightbox.empty();
 
   if( FAKE_SEARCH ) // work-around Google CSE 100 query/day limit
     getImages_LoremPixelAPI();
@@ -45,20 +46,29 @@ function getImages_GoogleCustomSearchAPI( searchTerms ) {
   for( var page = 41; page < 51; page += 10 ) {
 
     callAjax( query + '&start=' + page, function(results) {
+
+      var fragment = document.createDocumentFragment();
+
       results.items.forEach( function(item) {
         //console.log( 'item:', item );
         if( item.pagemap && item.pagemap.cse_thumbnail ) {
-          insertImage( item.pagemap.cse_thumbnail[0].src,
-                       item.pagemap.cse_image[0].src,
-                       item.title );
+          var urlThumbnail = item.pagemap.cse_thumbnail[0].src;
+          var urlFullSize = item.pagemap.cse_image[0].src;
+          fragment.appendChild( createImageListElement( urlThumbnail ) );
+          lightbox.addImageRef( urlFullSize, item.title );
         }
       });
+
+      imageList.appendChild( fragment ); // update DOM as a single operation
+
     });
 
   }
 }
 
 function getImages_LoremPixelAPI( searchTerms ) {
+
+  var fragment = document.createDocumentFragment();
   
   for( var i = 0; i < 40; i++ ) {
 
@@ -70,23 +80,25 @@ function getImages_LoremPixelAPI( searchTerms ) {
       'http://lorempixel.com', imageHeight, imageWidth, 'animals'
     ].join('/');
     
-    insertImage( randomImageUrl, randomImageUrl, 'fake animal caption!' );
+    fragment.appendChild( createImageListElement( randomImageUrl ) );
+    lightbox.addImageRef( randomImageUrl, 'fake animal caption!' );
   }
+
+  imageList.appendChild( fragment ); // update DOM as a single operation
 }
 
 
-function insertImage( urlThumbnail, urlActual, caption ) {
+function createImageListElement( urlImage ) {
 
   var img = document.createElement('img');
-  img.setAttribute( 'src', urlThumbnail );
-  img.dataset.caption = caption;
-  img.dataset.largeImage = urlActual;
-
+  img.setAttribute( 'src', urlImage );
+  
   var div = document.createElement('div');
   div.className = 'img-container';
   div.appendChild(img);
 
   var li = document.createElement('li');
   li.appendChild(div);
-  imageList.appendChild(li);
+  
+  return li;
 }

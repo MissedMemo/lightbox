@@ -1,7 +1,7 @@
 ( function( API ) {
 
-  var imagesContainer = document.querySelector('.lightbox-image-container');
-  var body = document.querySelector('body');
+  var imageData = [];
+  var imageIndex = 0;
 
   // inject ourselves on top of underlying page elements...
   var overlay = document.createElement('div');
@@ -19,18 +19,21 @@
                     +   '</div>'
                     + '</div>';
 
-  body.appendChild(overlay);
+  document.body.appendChild( overlay );
+
+  var parentContainer = document.querySelector('.lightbox-image-container');
 
   var closeButton  = document.querySelector( '#lightbox .close-button' );
   var lightbox  = document.querySelector( '#lightbox' );
+  var imageArea   = document.querySelector('#lightbox .image-area');
+  var imageCaption = document.querySelector('#lightbox .caption-bar span');
 
-  // ONE listener (on parent container) handles click on ANY image!
-  imagesContainer.addEventListener( 'click', function(e) {
+  // ONE listener to handle all image clicks
+  parentContainer.addEventListener( 'click', function(e) {
     if( e.target.src !== undefined ) {
       overlay.style.display = 'block';
-      body.classList.add('disable-scrolling');
-      //overlayImage.style.backgroundImage = 'url( ' + e.target.dataset.largeImage + ')';
-      //overlayCaption.textContent = e.target.dataset.caption;
+      document.body.classList.add('disable-scrolling');
+      display( imageData[0] );
     }
     e.stopPropagation();
   }, false );
@@ -38,11 +41,29 @@
 
   closeButton.addEventListener( 'click', function() {
     overlay.style.display = 'none';
-    body.classList.remove('disable-scrolling');
+    document.body.classList.remove('disable-scrolling');
   }, false );
 
 
+  function display( image ) {
+    imageArea.style.backgroundImage = 'url( ' + image.url + ')';
+    imageCaption.textContent = image.caption;
+  }
+
+
   /////////////////  Public API  ///////////////////
+
+  API.empty = function() {
+    imageData = [];
+    imageIndex = 0;
+  };
+
+  API.addImageRef = function( url, caption ) {
+    imageData.push({
+      url: url,
+      caption: caption
+    });
+  };
 
   API.setStyle_Margins = function( marginString ) {
     var margins = marginString.split(' ');
