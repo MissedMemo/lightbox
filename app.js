@@ -1,4 +1,4 @@
-var FAKE_SEARCH = true; // toggle actual vs. fake online image search results
+var FAKE_SEARCH = false; // toggle actual vs. fake online image search results
 
 var searchButton   = document.querySelector('.search-button');
 var searchField    = document.querySelector('.search-panel input');
@@ -43,18 +43,17 @@ function getImages_GoogleCustomSearchAPI( searchTerms ) {
             + '&q=' + searchTerms;
   
   // Google API limits results to 10 per query, so issue multiple queries to fill page
-  for( var page = 41; page < 51; page += 10 ) {
+  for( var num = 1; num < 51; num += 10 ) {
 
-    callAjax( query + '&start=' + page, function(results) {
+    callAjax( query + '&start=' + num, function(results) {
 
       var fragment = document.createDocumentFragment();
 
-      results.items.forEach( function(item) {
-        //console.log( 'item:', item );
+      results.items.forEach( function( item, i ) {
         if( item.pagemap && item.pagemap.cse_thumbnail ) {
           var urlThumbnail = item.pagemap.cse_thumbnail[0].src;
           var urlFullSize = item.pagemap.cse_image[0].src;
-          fragment.appendChild( createImageListElement( urlThumbnail ) );
+          fragment.appendChild( createImageListElement( urlThumbnail, i ) );
           lightbox.addImageRef( urlFullSize, item.title );
         }
       });
@@ -80,7 +79,7 @@ function getImages_LoremPixelAPI( searchTerms ) {
       'http://lorempixel.com', imageHeight, imageWidth, 'animals'
     ].join('/');
     
-    fragment.appendChild( createImageListElement( randomImageUrl ) );
+    fragment.appendChild( createImageListElement( randomImageUrl, i ) );
     lightbox.addImageRef( randomImageUrl, 'fake animal caption!' );
   }
 
@@ -88,10 +87,11 @@ function getImages_LoremPixelAPI( searchTerms ) {
 }
 
 
-function createImageListElement( urlImage ) {
+function createImageListElement( urlImage, i ) {
 
   var img = document.createElement('img');
   img.setAttribute( 'src', urlImage );
+  img.dataset.index = imageList.getElementsByTagName('li').length + i;
   
   var div = document.createElement('div');
   div.className = 'img-container';

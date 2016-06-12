@@ -28,7 +28,7 @@
     if( e.target.src !== undefined ) {
       overlay.style.display = 'block';
       document.body.classList.add('disable-scrolling');
-      display( 0 );
+      displayImage( +e.target.dataset.index );
     }
     e.stopPropagation();
   }, false );
@@ -48,23 +48,23 @@
   }, false );
 
   next.addEventListener( 'click', function() {
-    displayImage( +1 );
+    traverse( +1 );
   }, false );
 
   previous.addEventListener( 'click', function() {
-    displayImage( -1 );
+    traverse( -1 );
   }, false );
 
-  function displayImage( increment ) {
+  function traverse( direction ) {
 
-    var index = imageIndex + increment;
+    var index = imageIndex + direction;
 
     if( index > -1 && index < imageData.length ) {
-      display( index );
+      displayImage( index );
     }
   }
 
-  function display( index ) {
+  function displayImage( index ) {
     imageIndex = index;
     var image = imageData[ imageIndex ];
     imageArea.style.backgroundImage = 'url( ' + image.url + ')';
