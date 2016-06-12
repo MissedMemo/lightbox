@@ -23,7 +23,7 @@
 
   var parentContainer = document.querySelector('.lightbox-image-container');
 
-  // ONE listener to handle all image clicks
+  // ONE listener to handle ALL image clicks
   parentContainer.addEventListener( 'click', function(e) {
     if( e.target.src !== undefined ) {
       overlay.style.display = 'block';
@@ -33,7 +33,7 @@
     e.stopPropagation();
   }, false );
 
-
+  
   var closeButton  = document.querySelector( '#lightbox .close-button' );
   var lightbox  = document.querySelector( '#lightbox' );
   var imageArea   = document.querySelector('#lightbox .image-area');

@@ -6,9 +6,6 @@ html {
   font-family: sans-serif;
 }
 
-body {
-  /*background-color: rgba( 0, 0, 255, 0.2 );*/
-}
 
 /********************************
          Page Header
@@ -22,7 +19,6 @@ header {
   background-color: gray;
   height: 60px;
   padding: 20px;
-  overflow: hidden;
 }
 
 .branding {
@@ -45,9 +41,10 @@ header {
   right: 60px;
   height: 60px;
   line-height: 60px;
+  white-space: nowrap;
 }
 
-.search-panel input {
+.search-panel input[type='text'] {
   padding: 8px 15px;
   width: 300px;
   background: rgba( 50, 50, 50, 0.2 );
@@ -56,33 +53,34 @@ header {
   color: lightgray;
 }
 
-.search-panel button {
-  position: relative;
+.search-panel input[type='submit'] {
+  position:relative;
   padding: 9px 15px;
-  left: -6px;
   top: -1px;
-  background-color: #207cca;
+  left: -6px;
   border: none;
-  color: rgba( 255, 255, 255, 0.75 );
-  font-size: 18px;
+  background-color: #207cca;
+  font-size: 16px;
+  color: #fafafa;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
 
-.search-panel button:hover {
+.search-panel input[type='submit']:hover {
   background-color: blue;
 }
 
-.search-panel button:focus {
-  outline: 0;
-}
-
-.search-panel button[disabled] {
+.search-panel input[type='submit'][disabled] {
   background-color: transparent;
-  color: rgba( 255, 255, 255, 0.3 );
+  color: darkgray;
   border: 1px solid;
 }
 
+/*
+.search-panel button:focus {
+  outline: 0;
+}
+*/
 
 /********************************
      Main Content (images)
