@@ -40,8 +40,9 @@ header {
 *********************************/
 
 .search-panel {
-  float: right;
-  margin-right: 5%;
+  z-index: 10; /* silly idea: cover branding text on extreme resize */
+  position: absolute;
+  right: 60px;
   height: 60px;
   line-height: 60px;
 }
@@ -58,7 +59,7 @@ header {
 .search-panel button {
   position: relative;
   padding: 9px 15px;
-  left: -4px;
+  left: -6px;
   top: -1px;
   background-color: #207cca;
   border: none;
