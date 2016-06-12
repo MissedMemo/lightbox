@@ -51,13 +51,16 @@ function getImages_GoogleCustomSearchAPI( searchTerms ) {
     utils.callAjax( query + '&start=' + num, function(results) {
 
       var fragment = document.createDocumentFragment();
+      var i = 0; // can't use forEach index, since we just count VALID images
 
-      results.items.forEach( function( item, i ) {
-        if( item.pagemap && item.pagemap.cse_thumbnail ) {
-          var urlThumbnail = item.pagemap.cse_thumbnail[0].src;
-          var urlFullSize = item.pagemap.cse_image[0].src;
-          fragment.appendChild( createImageListElement( urlThumbnail, i ) );
-          lightbox.addImageRef( urlFullSize, item.title );
+      results.items.forEach( function( item ) {
+
+        var validImage = extractImageData( item.pagemap );
+
+        if( validImage ) { // Client receives thumbnails, full-size images go to lightbox
+          console.log( 'thumbnail, full-size, i:', validImage.urlThumbnail, validImage.urlFullSize, i );
+          fragment.appendChild( createImageListElement( validImage.urlThumnail, i++ ) );
+          lightbox.addImageRef( validImage.urlFullSize, item.title );          
         }
       });
 
@@ -67,6 +70,19 @@ function getImages_GoogleCustomSearchAPI( searchTerms ) {
 
   }
 }
+
+
+function extractImageData( data ) {
+  // keep it simple for now, but we could get fancy,
+  // substituting full-size image for missing thumbnail & vis-versa...
+  if( data && data.cse_thumbnail && data.cse_image ) {
+    return {
+      urlThumnail: data.cse_thumbnail[0].src,
+      urlFullSize: data.cse_image[0].src
+    };
+  }
+}
+
 
 function getImages_LoremPixelAPI( searchTerms ) {
 
