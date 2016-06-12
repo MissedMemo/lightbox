@@ -43,7 +43,7 @@ function getImages_GoogleCustomSearchAPI( searchTerms ) {
             + '&q=' + searchTerms;
   
   // Google API limits results to 10 per query, so issue multiple queries to fill page
-  for( var num = 1; num < 51; num += 10 ) {
+  for( var num = 41; num < 51; num += 10 ) {
 
     callAjax( query + '&start=' + num, function(results) {
 
