@@ -55,6 +55,19 @@
     traverse( -1 );
   }, false );
 
+  setMargins( parentContainer.dataset.lightboxMargins );
+
+  
+  function setMargins( marginString ) {
+    if( marginString ) {
+      var margins = marginString.split(' ');
+      lightbox.style.top = margins[0];
+      lightbox.style.right = margins[1];
+      lightbox.style.bottom = margins[2];
+      lightbox.style.left = margins[3];
+    }
+  }
+
   function traverse( direction ) {
 
     var index = imageIndex + direction;
@@ -84,14 +97,6 @@
       url: url,
       caption: caption
     });
-  };
-
-  API.setStyle_Margins = function( marginString ) {
-    var margins = marginString.split(' ');
-    lightbox.style.top = margins[0];
-    lightbox.style.right = margins[1];
-    lightbox.style.bottom = margins[2];
-    lightbox.style.left = margins[3];
   };
 
   window.lightbox = API;

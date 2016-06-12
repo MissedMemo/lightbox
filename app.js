@@ -4,9 +4,8 @@ var searchButton   = document.querySelector('.search-button');
 var searchField    = document.querySelector('.search-panel input');
 var imageList      = document.querySelector('.image-list');
 
-searchButton.disabled = true; // init to disabled
-
-lightbox.setStyle_Margins('120px 20px 20px 20px');
+//searchButton.disabled = true; // init to disabled
+//lightbox.setStyle_Margins('120px 20px 20px 20px');
 
 
 searchField.addEventListener('input', function(e) {
