@@ -90,6 +90,17 @@ header {
   text-align: center;
 }
 
+.message-area {
+  margin: 15% auto 0 auto;
+  font-size: 32px;
+  font-style: italic;
+  color: lightgray;
+}
+
+.message-area p {
+  margin: 40px;
+}
+
 .image-list {
   padding: 0;
   margin: 0;

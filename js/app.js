@@ -1,9 +1,10 @@
 
 // for testing, use actual (CSE) or fake (lorempixel) image search
-var FAKE_SEARCH = true;
+var FAKE_SEARCH = false;
 
 var searchField   = document.querySelector('.search-panel input');
 var searchButton  = document.querySelector('.search-panel button');
+var messageArea   = document.querySelector('.message-area');
 var imageList     = document.querySelector('.image-list');
 
 
@@ -23,6 +24,7 @@ searchButton.addEventListener( 'click', function() {
   
   imageList.empty(); // remove currently-displayed images
   lightbox.empty();
+  messageArea.style.display = 'block';
 
   if( FAKE_SEARCH ) // work-around Google CSE's 100 query/day limit
     getImages_LoremPixelAPI();
@@ -67,7 +69,7 @@ function getImages_GoogleCustomSearchAPI( searchTerms ) {
       });
 
       imageList.appendChild( fragment ); // update DOM as a single operation
-
+      messageArea.style.display = 'none';
     });
 
   }
@@ -105,6 +107,7 @@ function getImages_LoremPixelAPI( searchTerms ) {
   }
 
   imageList.appendChild( fragment ); // update DOM as a single operation
+  messageArea.style.display = 'none';
 }
 
 
