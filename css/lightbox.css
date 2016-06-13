@@ -52,9 +52,9 @@ body.disable-scrolling {
   background-repeat: no-repeat;
 }
 
-.image-area .imagePrevious,
-.image-area .imageNext {
+#lightbox .nav-arrow {
   position: absolute;
+  top: 50%;
   transform: translateY(-50%);
   font-size: 72px;
   font-weight: bold;
@@ -64,20 +64,22 @@ body.disable-scrolling {
   border: none;
   cursor: pointer;
 }
-.image-area .imagePrevious:hover,
-.image-area .imageNext:hover {
+
+#lightbox .nav-arrow:hover {
   background-color: rgba(255,255,255,0.5);
   border-radius: 6px;
 }
 
-#lightbox .imagePrevious {
-  left: 5px;
-  top: 50%;
+#lightbox .nav-arrow:focus {
+  outline: 0;
 }
 
-#lightbox .imageNext {
+#lightbox .arrow-previous {
+  left: 5px;
+}
+
+#lightbox .arrow-next {
   right: 5px;
-  top: 50%;
 }
 
 #lightbox .caption-bar {
