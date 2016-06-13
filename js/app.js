@@ -54,25 +54,29 @@ function getImages_GoogleCustomSearchAPI( searchTerms ) {
 
     utils.callAjax( query + '&start=' + num, function(results) {
 
-      var fragment = document.createDocumentFragment();
-      var i = 0; // can't use forEach index, since we just count VALID images
+      if( results.searchInformation.totalResults > 0 ) {
 
-      results.items.forEach( function( item ) {
+        var fragment = document.createDocumentFragment();
+        var i = 0; // can't use forEach index, since we only count VALID images
 
-        var validImage = extractImageData( item.pagemap );
+        results.items.forEach( function( item ) {
 
-        if( validImage ) { // Client receives thumbnails, full-size images go to lightbox
-          console.log( 'thumbnail, full-size, i:', validImage.urlThumbnail, validImage.urlFullSize, i );
-          fragment.appendChild( createImageListElement( validImage.urlThumnail, i++ ) );
-          lightbox.addImageRef( validImage.urlFullSize, item.title );          
-        }
-      });
+          var validImage = extractImageData( item.pagemap );
 
-      imageList.appendChild( fragment ); // update DOM as a single operation
-      messageArea.style.display = 'none';
+          if( validImage ) { // Client receives thumbnails, full-size images go to lightbox
+            fragment.appendChild( createImageListElement( validImage.urlThumnail, i++ ) );
+            lightbox.addImageRef( validImage.urlFullSize, item.title );          
+          }
+        });
+
+        imageList.appendChild( fragment ); // update DOM as a single operation
+        messageArea.style.display = 'none';
+      }
+      
     });
 
   }
+  
 }
 
 
