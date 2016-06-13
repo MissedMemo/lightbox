@@ -33,13 +33,19 @@
     e.stopPropagation();
   }, false );
 
-  
-  var closeButton  = document.querySelector( '#lightbox .close-button' );
-  var lightbox  = document.querySelector( '#lightbox' );
-  var imageArea   = document.querySelector('#lightbox .image-area');
+  /* Note:  There may be a potential for some overlay elements not to be fully
+     appended to the DOM before acquiring references below. A production-quality
+     implementation might want to use some element-level equivalent to 'onload',
+     or even explicitly add each individual element, attribute, etc. -- but the
+     ability to view the entire overlay 'teamplate' is a huge convenience.
+     see: http://stackoverflow.com/a/16726669
+  */
+  var closeButton  = document.querySelector('#lightbox .close-button');
+  var lightbox     = document.querySelector('#lightbox');
+  var imageArea    = document.querySelector('#lightbox .image-area');
   var imageCaption = document.querySelector('#lightbox .caption-bar span');
-  var previous = document.querySelector('#lightbox .imagePrevious' );
-  var next = document.querySelector('#lightbox .imageNext' );
+  var previous     = document.querySelector('#lightbox .imagePrevious');
+  var next         = document.querySelector('#lightbox .imageNext');
 
 
   closeButton.addEventListener( 'click', function() {

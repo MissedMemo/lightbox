@@ -1,4 +1,6 @@
-var FAKE_SEARCH = false; // toggle actual vs. fake online image search results
+
+// for testing, use actual (CSE) or fake (lorempixel) image search
+var FAKE_SEARCH = false;
 
 var searchField   = document.querySelector('.search-panel input');
 var searchButton  = document.querySelector('.search-panel button');
@@ -22,7 +24,7 @@ searchButton.addEventListener( 'click', function() {
   imageList.empty(); // remove currently-displayed images
   lightbox.empty();
 
-  if( FAKE_SEARCH ) // work-around Google CSE 100 query/day limit
+  if( FAKE_SEARCH ) // work-around Google CSE's 100 query/day limit
     getImages_LoremPixelAPI();
   else
     getImages_GoogleCustomSearchAPI( searchField.value );
