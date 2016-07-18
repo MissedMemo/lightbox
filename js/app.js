@@ -1,6 +1,6 @@
 
 // for testing, use actual (CSE) or fake (lorempixel) image search
-var FAKE_SEARCH = false;
+var FAKE_SEARCH = true;
 
 var searchField   = document.querySelector('.search-panel input');
 var searchButton  = document.querySelector('.search-panel button');
